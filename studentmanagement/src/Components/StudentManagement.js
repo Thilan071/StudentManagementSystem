@@ -2,6 +2,9 @@ import { Table } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import students from '../Constant/student.json';
 import { useEffect } from 'react';
+import AddStudent from './AddStudent';
+import EditStudent from './EditStudent';
+import DeleteStudent from './DeleteStudent';
 
 function StudentManagement(){
 
@@ -10,7 +13,7 @@ return(
     <div className="App">
     <h1 className='d-flex justify-content-center header-background'>Student Management System</h1>
     <div className='d-flex justify-content-end'>
-<button className='btn btn-success'>Add Student</button>
+ <AddStudent></AddStudent>
     </div>
     <Table striped bordered hover>
     <thead> 
@@ -24,7 +27,7 @@ return(
      </thead>
       <tbody>
       {
-    students.map(student=>{
+    students.map((student)=>{
 
         return(
             <tr>
@@ -34,12 +37,11 @@ return(
               <td>
                {student.address}
               </td>
-              <Button className='m-1 btn btn-light'>Edit</Button>
+             <EditStudent student = {student}></EditStudent>
                 
-                <Button className='m-2 btn btn-light'>Delete</Button>
+             <DeleteStudent></DeleteStudent>
              </tr>
         )
-
     }
     )
 }
