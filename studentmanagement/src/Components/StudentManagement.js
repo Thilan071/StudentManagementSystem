@@ -1,12 +1,32 @@
 import { Table } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-import students from '../Constant/student.json';
-import { useEffect } from 'react';
+// import students from '../Constant/student.json';
+import { useEffect, useState } from 'react';
 import AddStudent from './AddStudent';
 import EditStudent from './EditStudent';
 import DeleteStudent from './DeleteStudent';
 
 function StudentManagement(){
+  const [students, setStudents] = useState(JSON.parse(localStorage.getItem('students')))
+ 
+  useEffect(()=>{
+    // setStudents(JSON.parse(localStorage.getItem('students')))
+    console.log("updated",JSON.parse(localStorage.getItem('students')))
+
+    // const handleStorageChange = () => {
+    //   setStudents(JSON.parse(localStorage.getItem('students')))
+    // };
+
+    // window.addEventListener('storage', handleStorageChange);
+    window.onstorage = () =>{
+      setStudents(JSON.parse(localStorage.getItem('students')))
+    }
+
+    // return () => {
+    //   window.removeEventListener('storage', handleStorageChange);
+    // };
+
+  },[JSON.parse(localStorage.getItem('students'))])
 
 return(
 

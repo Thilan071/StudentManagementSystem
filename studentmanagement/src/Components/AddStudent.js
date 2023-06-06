@@ -2,12 +2,32 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import {v4 as uuidv4} from 'uuid';
+
 function AddStudent(){
-
+  const [students, setStudents] = useState(JSON.parse(localStorage.getItem('students')))
     const [show, setShow] = useState(false);
-
+    const [name, setName] = useState("");
+    const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
+    
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleSave = () => {
+
+    let newStudents = [...students, {
+      "student_id": "1111",
+      "name": name,
+      "phone":phone,
+      "address": address,
+    }]
+    
+    localStorage.setItem('students',JSON.stringify(newStudents))
+    console.log(name,phone,address);
+    console.log("saved",JSON.parse(localStorage.getItem('students')))
+
+  }
 
   return (
     <>
@@ -19,13 +39,15 @@ Add Student      </Button>
           <Modal.Title>Add New Student</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form >
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Name</Form.Label>
               
               <Form.Control
                 type="text"
                 autoFocus
+                defaultValue={name}
+                onChange={(event)=>{setName(event.target.value)}}
               />
             </Form.Group>
             <Form.Group
@@ -42,6 +64,8 @@ Add Student      </Button>
               <Form.Control
                 type="text"
                 autoFocus
+                defaultValue={phone}
+                onChange={(event)=>{setPhone(event.target.value)}}
               />
             </Form.Group>
             <Form.Group
@@ -58,6 +82,8 @@ Add Student      </Button>
               <Form.Control
                 type="text"
                 autoFocus
+                defaultValue={address}
+                onChange={(event)=>{setAddress(event.target.value)}}
               />
             </Form.Group>
             <Form.Group
@@ -88,9 +114,11 @@ Add Student      </Button>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleSave}>
+
             Save Changes
           </Button>
+         
         </Modal.Footer>
       </Modal>
     </>
