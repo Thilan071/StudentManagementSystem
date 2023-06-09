@@ -6,6 +6,8 @@ import {v4 as uuidv4} from 'uuid';
 
 function AddStudent(){
   const [students, setStudents] = useState(JSON.parse(localStorage.getItem('students')))
+//   console.log("updated",JSON.parse(localStorage.getItem('students')))
+
     const [show, setShow] = useState(false);
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
@@ -13,19 +15,21 @@ function AddStudent(){
     
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  console.log(students);
   const handleSave = () => {
 
-    let newStudents = [...students, {
-      "student_id": "1111",
+    const newStudent = {
+      "student_id": uuidv4(),
       "name": name,
       "phone":phone,
       "address": address,
-    }]
+    }
+    setStudents([...students, newStudent]);
+    handleClose();
     
-    localStorage.setItem('students',JSON.stringify(newStudents))
-    console.log(name,phone,address);
-    console.log("saved",JSON.parse(localStorage.getItem('students')))
+    // localStorage.setItem('students',JSON.stringify(newStudents))
+    // console.log(name,phone,address);
+    // console.log("saved",JSON.parse(localStorage.getItem('students')))
 
   }
 

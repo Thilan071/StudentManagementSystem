@@ -1,6 +1,6 @@
 import { Table } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-// import students from '../Constant/student.json';
+import students from '../Constant/student.json';
 import { useEffect, useState } from 'react';
 import AddStudent from './AddStudent';
 import EditStudent from './EditStudent';
